@@ -1,0 +1,25 @@
+{
+    "name": "Problem Set 1: Search",
+    "problems": [
+        {
+            "name": "Minimax",
+            "testcases_path": "q1",
+            "timeout": 1
+        },
+        {
+            "name": "Alpha Beta Pruning",
+            "testcases_path": "q2",
+            "timeout": 1
+        },
+        {
+            "name": "Alpha Beta Pruning with Move Ordering",
+            "testcases_path": "q3",
+            "timeout": 1
+        },
+        {
+            "name": "Expectimax",
+            "testcases_path": "q4",
+            "timeout": 1
+        }
+    ]
+}
