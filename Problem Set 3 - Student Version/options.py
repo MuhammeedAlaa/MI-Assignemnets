@@ -9,6 +9,7 @@ def question2_1():
         "living_reward": -3.5
     }
 
+# we make living_reward 0 and make discount_factor slightly small and try to add noise on actions taken
 def question2_2():
     #TODO: Choose options that would lead to the desired results
     return {
@@ -17,7 +18,7 @@ def question2_2():
         "living_reward": 0
     }
 
-# we make living_reward slitly negative so he try to leave from the far terminal state with quickest path
+# we make living_reward slightly negative so he try to leave from the far terminal state with quickest path
 def question2_3():
     #TODO: Choose options that would lead to the desired results
     return {
@@ -26,6 +27,7 @@ def question2_3():
         "living_reward": -2
     }
 
+# we make living_reward very small negative so he try to leave from the far terminal state with long path
 def question2_4():
     #TODO: Choose options that would lead to the desired results
     return {
@@ -34,6 +36,7 @@ def question2_4():
         "living_reward": -0.03
     }
 
+# we make the living_reward big postive and action is deterministic so that the agent will not go to a terminal state and it will keep moving to collect the postive reward
 def question2_5():
     #TODO: Choose options that would lead to the desired results
     return {
@@ -41,7 +44,7 @@ def question2_5():
         "discount_factor": 0.99,
         "living_reward": 100000
     }
-
+# we make the living_reward big negative and action is deterministic so that the agent will try to skip the big penalty by go to any terminal state
 def question2_6():
     #TODO: Choose options that would lead to the desired results
     return {

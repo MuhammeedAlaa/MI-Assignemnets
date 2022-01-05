@@ -20,17 +20,24 @@ class ValueIterationAgent(Agent[S, A]):
     # Given a state, compute its utility using the bellman equation
     # if the state is terminal, return 0
     def compute_bellman(self, state: S) -> float:
+        # if current state is terminal return 0
         if self.mdp.is_terminal(state):
             return 0
+        # get all actions based on current state
         actions = self.mdp.get_actions(state)
+        # create temp u to store utilities to update it after
         res = []
         for action in actions:
+            # get next states based on action
             successors = self.mdp.get_successor(state, action)
             U = 0
+            # preform bellman eq on successors
             for successor in successors:
                 U +=  successors[successor] * (self.mdp.get_reward(state, action, successor) +
                      self.discount_factor * self.utilities[successor.__str__()])
+            # push ot temp array
             res.append(U)
+        #get the max utility in the temp array
         max_item = float('-inf')
         for u in res:
             if max_item < u:
@@ -41,26 +48,34 @@ class ValueIterationAgent(Agent[S, A]):
     # NOTE: this function does incremental update and does not clear the utilities to 0 before running
     # In other words, calling train(M) followed by train(N) is equivalent to just calling train(N+M)
     def train(self, iterations: int = 1):
+        # get all states to update the utilities
         states = self.mdp.get_states()
         for _ in range(iterations):
+            # create temp u to store utilities to update it after
             temp_u = {}
             for state in states:
                  temp_u[state.__str__()] = self.compute_bellman(state)
+            #update utilities
             for state in states:
                 self.utilities[state.__str__()] = temp_u[state.__str__()]
     
     # Given an environment and a state, return the best action as guided by the learned utilities and the MDP
     # If the state is terminal, return None
     def act(self, env: Environment[S, A], state: S) -> A:
+        #get all actions for the current state
         actions = self.mdp.get_actions(state)
         pi = []
         for action in actions:
+            # get next states based on action
             successors = self.mdp.get_successor(state, action)
             u_p = 0
+            #get the utility of this action
             for successor in successors:
                 u_p += successors[successor] * (self.mdp.get_reward(state, action, successor) +
                                                 self.discount_factor * self.utilities[successor.__str__()])
+            # push it to temp array
             pi.append(u_p)
+        # get the arg max action
         max_item = 0
         for inx, u in enumerate(pi):
             if pi[max_item] < u:
